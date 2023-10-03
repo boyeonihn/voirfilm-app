@@ -1,23 +1,27 @@
 import { createBrowserRouter } from 'react-router-dom';
-import { Root } from './routes/Root';
-import { Home, Search, Tv } from './routes';
+import App from './App';
+import { Popular, Search, ComingSoon, NowPlaying } from './routes';
 
 export const router = createBrowserRouter([
   {
     path: '/',
-    element: <Root />,
+    element: <App />,
     children: [
       {
         path: '',
-        element: <Home />,
+        element: <Popular />,
       },
       {
-        path: 'tv',
-        element: <Tv />,
+        path: 'now-playing',
+        element: <NowPlaying />,
       },
       {
         path: 'search',
         element: <Search />,
+      },
+      {
+        path: 'coming-soon',
+        element: <ComingSoon />,
       },
     ],
   },

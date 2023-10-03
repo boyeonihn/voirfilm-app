@@ -1,14 +1,13 @@
 import { Reset } from 'styled-reset';
-import { RouterProvider } from 'react-router-dom';
-import { router } from './router';
-
-import './App.css';
+import { Outlet } from 'react-router-dom';
+import { Header } from './components';
 
 function App() {
   return (
     <>
       <Reset />
-      <RouterProvider router={router} />
+      <Header />
+      <Outlet />
     </>
   );
 }

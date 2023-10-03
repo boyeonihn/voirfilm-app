@@ -1,3 +1,4 @@
-export * from './Home';
+export * from './Popular';
 export * from './Search';
-export * from './Tv';
+export * from './ComingSoon';
+export * from './NowPlaying';

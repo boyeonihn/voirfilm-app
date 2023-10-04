@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
-import { Popular, Search, ComingSoon, NowPlaying, Movie } from './routes';
+import { Search, Movie, Layout } from './pages';
 
 export const router = createBrowserRouter([
   {
@@ -9,11 +9,11 @@ export const router = createBrowserRouter([
     children: [
       {
         path: '',
-        element: <Popular />,
+        element: <Layout />,
       },
       {
         path: 'now-playing',
-        element: <NowPlaying />,
+        element: <Layout />,
       },
       {
         path: 'search',
@@ -21,7 +21,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'coming-soon',
-        element: <ComingSoon />,
+        element: <Layout />,
       },
       {
         path: 'movie/:id',

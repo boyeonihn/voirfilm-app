@@ -1,19 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
-import { getPopular, IMovie } from '../api';
+import { getPopular, IAPIResponse } from '../api';
 
 export const Popular = () => {
   const { isLoading, data } = useQuery({
     queryKey: ['popularData'],
-    queryFn: getPopular,
+    queryFn: async () => {
+      const data: IAPIResponse = await getPopular();
+      return data.results;
+    },
   });
 
   const movies = data.results;
   return (
     <div>
-      <h1>Popular</h1>
-      {isLoading
-        ? 'LOADING'
-        : movies.map((movie: IMovie) => <Movie key={movie.id} />)}
+        <MovieList>
+          {data?.map((movie) => (
+            <Movie key={movie.id} movie={movie} viewDetail={viewDetail} />
+          ))}
       <button className="btn btn-primary">Button</button>
     </div>
   );

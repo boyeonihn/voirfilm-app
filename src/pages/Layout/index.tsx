@@ -1,13 +1,27 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
+import { useMatch } from 'react-router-dom';
 import { Loading, Movie, MovieList } from '@/components';
+import { URL_ARRAY } from '@/const';
 import { IAPIResponse, IMovie } from '@/types';
 import { Wrapper, Overlay } from './styled';
+import { getUseMatch, getCurrentUrlType } from '@/utils';
 
 export const Layout = () => {
   const [clickedMovie, setClickedMovie] = useState<IMovie | null>(null);
   const mainRef = useRef(null);
+
+  const [homeMatch, comingSoonMatch, nowPlayingMatch] = getUseMatch(
+    useMatch,
+    URL_ARRAY
+  );
+  const currentUrlType = getCurrentUrlType(
+    homeMatch,
+    comingSoonMatch,
+    nowPlayingMatch
+  );
+
   const { isLoading, data } = useQuery({
     queryKey: [`${currentUrlType.url}Data`],
     queryFn: async () => {

@@ -1,40 +1,33 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 const Nav = styled.nav`
+  padding: 100px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-`;
-
-const Col = styled.div``;
-const Logo = styled.svg`
-  margin-right: 50px;
-`;
-
-const Links = styled.ul`
-  display: flex;
+  list-style: none;
   li {
     text-transform: uppercase;
     font-weight: bold;
   }
 `;
 
-const LinkItem = styled.li``;
+const NavItem = styled.li``;
 
 export const Header = () => {
   return (
     <Nav>
-      <Col>
-        <Logo />
-        <Links>
-          <LinkItem>Popular</LinkItem>
-          <LinkItem>Coming Soon</LinkItem>
-          <LinkItem>Now Playing</LinkItem>
-        </Links>
-      </Col>
-      <Col>
-        <button>Search</button>
-      </Col>
+      <NavItem>
+        <Link to="/">Popular</Link>
+      </NavItem>
+      <NavItem>
+        <Link to="/coming-soon">Coming Soon</Link>
+      </NavItem>
+      <NavItem>
+        <Link to="/now-playing">Now Playing</Link>
+      </NavItem>
+      <button>Search</button>
     </Nav>
   );
 };

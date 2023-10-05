@@ -9,15 +9,9 @@ import { Searchbar } from './Searchbar';
 
 export const Header = () => {
   const [searchOpen, setSearchOpen] = useState(false);
-  const [homeMatch, comingSoonMatch, nowPlayingMatch] = getUseMatch(
-    useMatch,
-    URL_ARRAY
-  );
-  const currentUrlType = getCurrentUrlType(
-    homeMatch,
-    comingSoonMatch,
-    nowPlayingMatch
-  );
+  const array = getUseMatch(useMatch, URL_ARRAY);
+  const url = array.find((it) => it !== null);
+  const currentUrlType = getCurrentUrlType(url);
 
   const toggleSearch = () => {
     setSearchOpen((prev) => !prev);

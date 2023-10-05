@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
-import { useMatch } from 'react-router-dom';
+import { useMatch, useNavigate, useParams } from 'react-router-dom';
 import { Loading, Movie, MovieList } from '@/components';
 import { URL_ARRAY } from '@/const';
 import { IAPIResponse, IMovie } from '@/types';
@@ -9,18 +9,10 @@ import { Wrapper, Overlay } from './styled';
 import { getUseMatch, getCurrentUrlType } from '@/utils';
 
 export const Layout = () => {
+  const navigate = useNavigate();
   const [clickedMovie, setClickedMovie] = useState<IMovie | null>(null);
   const mainRef = useRef(null);
-
-  const [homeMatch, comingSoonMatch, nowPlayingMatch] = getUseMatch(
-    useMatch,
-    URL_ARRAY
-  );
-  const currentUrlType = getCurrentUrlType(
-    homeMatch,
-    comingSoonMatch,
-    nowPlayingMatch
-  );
+  const { id } = useParams();
 
   const { isLoading, data } = useQuery({
     queryKey: [`${currentUrlType.url}Data`],
@@ -32,6 +24,7 @@ export const Layout = () => {
 
   const viewDetail = (movie: IMovie) => {
     setClickedMovie(movie);
+    navigate(`/movie/${movie.id}`);
   };
   return (
     <Wrapper ref={mainRef}>

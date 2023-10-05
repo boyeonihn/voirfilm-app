@@ -28,20 +28,28 @@ const MovieUnit = styled(motion.article)`
 `;
 
 const movieVariants = {
-  normal: {
-    scale: 1,
+  hidden: {
+    scale: 0,
+    opacity: 1,
   },
-  hover: {
-    scale: 1.1,
-    y: -50,
+  visible: {
+    scale: 1,
+    opacity: 1,
     transition: {
-      delay: 0.3,
-      duaration: 0.1,
-      type: 'tween',
+      duration: 0.3,
     },
   },
 };
 
+const hover = {
+  scale: 1.1,
+  y: -20,
+  transition: {
+    delay: 0.3,
+    duaration: 0.1,
+    type: 'tween',
+  },
+};
 export const Movie = ({ movie, viewDetail, layoutId }: Props) => {
   const { title, poster_path } = movie;
   const image = makeImagePath(poster_path);
@@ -49,8 +57,7 @@ export const Movie = ({ movie, viewDetail, layoutId }: Props) => {
     <MovieUnit
       variants={movieVariants}
       onClick={viewDetail}
-      initial="normal"
-      whileHover="hover"
+      whileHover={hover}
       transition={{ type: 'tween' }}
       layoutId={layoutId}
     >

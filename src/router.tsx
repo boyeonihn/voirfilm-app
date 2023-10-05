@@ -1,11 +1,12 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App';
-import { Search, Movie, Layout } from './pages';
+import { Search, Layout, ErrorElement } from './pages';
 
 export const router = createBrowserRouter([
   {
     path: '/',
     element: <App />,
+    errorElement: <ErrorElement />,
     children: [
       {
         path: '',
@@ -25,7 +26,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'movie/:id',
-        element: <Movie />,
+        element: <Layout />,
       },
     ],
   },

@@ -7,25 +7,32 @@ import { URL_ARRAY } from '@/const';
 import { IAPIResponse, IMovie, getPopular } from '@/types';
 import { Wrapper, Overlay } from './styled';
 import { getUseMatch, getCurrentUrlType, isUrlMovie } from '@/utils';
+import { useRef } from 'react';
 
 export const Layout = () => {
   const navigate = useNavigate();
-  const [clickedMovie, setClickedMovie] = useState<IMovie | null>(null);
-  const mainRef = useRef(null);
   const { id } = useParams();
-  const array = getUseMatch(useMatch, URL_ARRAY);
-  const url = array.find((it) => it !== null);
-  const currentUrlType = getCurrentUrlType(url);
+  const prevLocation = useRef('/');
+
+  const array = getUseMatch(useMatch, URL_ARRAY).find((it) => it !== null);
+  const { url, api } = getCurrentUrlType(array);
+
+  if (!isUrlMovie(url)) {
+    prevLocation.current = url;
+  }
+
+  const prevPath = Object.values(URL_TYPES).find(
+    (it) => it.url === prevLocation.current
+  );
 
   const { isLoading, data } = useQuery({
-    queryKey: [`${currentUrlType.url}Data`],
+    queryKey: [`${isUrlMovie(url) ? 'current-movie' : url}-Data`],
     queryFn: async () => {
-      if (isUrlMovie(currentUrlType.url)) {
-        const data: IAPIResponse = await getPopular();
-        console.log(data);
+      if (isUrlMovie(url)) {
+        const data: IAPIResponse = await prevPath?.api();
         return data.results;
       } else {
-        const data: IAPIResponse = await currentUrlType.api();
+        const data: IAPIResponse = await api();
         return data.results;
       }
     },

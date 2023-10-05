@@ -35,14 +35,34 @@ export const NavItem = styled.li`
   position: relative;
 `;
 
-export const Circle = styled.span`
+export const Circle = styled(motion.span)`
   position: absolute;
   width: 8px;
   height: 8px;
-  background-color: red;
+  background-color: pink;
   border-radius: 50%;
   bottom: -10px;
   left: 0;
   right: 0;
   margin: 0 auto;
+`;
+
+export const Search = styled.span`
+  display: flex;
+  position: relative;
+  justify-content: center;
+  svg {
+    height: 25px;
+  }
+`;
+
+export const SearchSVG = styled(motion.svg)`
+  color: pink;
+  position: absolute;
+`;
+
+export const Input = styled(motion.input)`
+  transform-origin: right center;
+  position: absolute;
+  background: transparent;
 `;

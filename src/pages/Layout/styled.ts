@@ -8,12 +8,12 @@ export const Wrapper = styled.div`
 `;
 
 export const Overlay = styled(motion.div)`
-  width: 100%;
+  position: fixed;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  position: absolute;
+  width: 100%;
   top: 0;
-  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
 
   display: flex;
   justify-content: center;

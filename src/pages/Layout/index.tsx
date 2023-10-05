@@ -35,20 +35,22 @@ export const Layout = () => {
   };
   return (
     <Wrapper ref={mainRef}>
-      <MovieList>
-        {isLoading ? (
-          <Loading />
-        ) : (
-          data?.map((movie) => (
-            <Movie
-              key={movie.id}
-              movie={movie}
-              layoutId={String(movie.id)}
-              viewDetail={() => viewDetail(movie)}
-            />
-          ))
-        )}
-      </MovieList>
+      <AnimatePresence onExitComplete={toggleLeaving}>
+        <MovieList>
+          {isLoading ? (
+            <Loading />
+          ) : (
+            data?.map((movie) => (
+              <Movie
+                key={movie.id}
+                movie={movie}
+                layoutId={String(movie.id)}
+                viewDetail={() => viewDetail(movie)}
+              />
+            ))
+          )}
+        </MovieList>
+      </AnimatePresence>
       <AnimatePresence>
         {clickedMovie && (
           <Overlay

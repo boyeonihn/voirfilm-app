@@ -1,10 +1,11 @@
-import { IMovie, makeImagePath } from '../api';
 import styled from 'styled-components';
-import { easeIn, motion } from 'framer-motion';
+import { motion } from 'framer-motion';
+import { IMovie, makeImagePath } from '@/types/api';
 
 interface Props {
   movie: IMovie;
   viewDetail: () => void;
+  layoutId: string;
 }
 
 const MovieUnit = styled(motion.article)`
@@ -26,21 +27,35 @@ const MovieUnit = styled(motion.article)`
   }
 `;
 
-export const Movie = ({ movie, viewDetail }: Props) => {
-  console.log('### movie', movie);
+const movieVariants = {
+  normal: {
+    scale: 1,
+  },
+  hover: {
+    scale: 1.1,
+    y: -50,
+    transition: {
+      delay: 0.3,
+      duaration: 0.1,
+      type: 'tween',
+    },
+  },
+};
 
+export const Movie = ({ movie, viewDetail, layoutId }: Props) => {
   const { title, poster_path } = movie;
   const image = makeImagePath(poster_path);
   return (
     <MovieUnit
+      variants={movieVariants}
       onClick={viewDetail}
-      whileHover={{
-        scale: 1.1,
-      }}
-      transition={{ duration: 0.2 }}
+      initial="normal"
+      whileHover="hover"
+      transition={{ type: 'tween' }}
+      layoutId={layoutId}
     >
       <img src={image} />
-      <h2>Movie! {title}</h2>
+      <h2>{title}</h2>
     </MovieUnit>
   );
 };

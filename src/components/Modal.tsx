@@ -1,4 +1,4 @@
-export const MovieDetail = () => {
+export const Modal = () => {
   return (
     <div className="card w-96 glass">
       <figure>

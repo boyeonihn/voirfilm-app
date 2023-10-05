@@ -1,19 +1,28 @@
-export const Modal = () => {
+import { motion } from 'framer-motion';
+import styled from 'styled-components';
+
+interface ModalProps {
+  layoutId: string;
+}
+const ModalCard = styled(motion.section)`
+  position: fixed;
+  width: 40vw;
+  height: 80vh;
+  background-color: red;
+  top: 50px; /* specify units for numerical values */
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+
+  p {
+    font-size: 5rem;
+  }
+`;
+
+export const Modal = ({ layoutId }: ModalProps) => {
   return (
-    <div className="card w-96 glass">
-      <figure>
-        <img
-          src="/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
-          alt="car!"
-        />
-      </figure>
-      <div className="card-body">
-        <h2 className="card-title">Life hack</h2>
-        <p>How to park your car at your garage?</p>
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary">Learn now!</button>
-        </div>
-      </div>
-    </div>
+    <ModalCard layoutId={layoutId}>
+      <p>HI</p>
+    </ModalCard>
   );
 };

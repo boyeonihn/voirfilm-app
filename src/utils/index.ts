@@ -1,21 +1,7 @@
-import { home, comingSoon, nowPlaying } from '@/const';
+import { home, comingSoon, nowPlaying, movie } from '@/const';
 import { PathPattern } from 'react-router-dom';
 import { pathType } from '@/types';
 import { useMatch } from 'react-router-dom';
-
-export const getCurrentUrlType = (
-  homeMatch: pathType,
-  comingSoonMatch: pathType,
-  nowPlayingMatch: pathType
-) => {
-  const currentUrlType = homeMatch
-    ? home
-    : comingSoonMatch
-    ? comingSoon
-    : nowPlaying;
-
-  return currentUrlType;
-};
 
 export const getUseMatch = (
   fn: typeof useMatch,
@@ -23,4 +9,23 @@ export const getUseMatch = (
 ) => {
   const array = urlArray.map((url) => fn(url));
   return array;
+};
+
+export const isUrlMovie = (url: string) => {
+  return url === 'movie/:id';
+};
+export const getCurrentUrlType = (url: pathType | undefined) => {
+  const pathname = url?.pathname.slice(1);
+
+  if (pathname === home.url) {
+    return home;
+  } else if (pathname === nowPlaying.url) {
+    return nowPlaying;
+  } else if (pathname === comingSoon.url) {
+    return comingSoon;
+  } else if (pathname?.includes('movie')) {
+    return movie;
+  } else {
+    return home;
+  }
 };

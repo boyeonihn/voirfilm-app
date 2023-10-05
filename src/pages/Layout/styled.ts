@@ -5,7 +5,6 @@ export const Wrapper = styled.div`
   padding-top: 50px;
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
 `;
 
 export const Overlay = styled(motion.div)`

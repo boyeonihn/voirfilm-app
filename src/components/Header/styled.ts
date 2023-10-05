@@ -15,7 +15,9 @@ export const Logo = styled(motion.h1)`
   font-family: 'Pacifico', cursive;
   font-size: 5rem;
 `;
-export const Nav = styled.nav`
+
+export const Nav = styled(motion.nav)`
+  background-color: transparent;
   padding: 50px;
   display: flex;
   justify-content: space-between;

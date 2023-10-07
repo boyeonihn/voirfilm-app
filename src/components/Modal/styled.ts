@@ -4,13 +4,12 @@ import { motion } from 'framer-motion';
 export const ModalCard = styled(motion.section)`
   position: fixed;
   width: 500px;
-  height: 85vh;
+  height: 750px;
   background-color: pink;
   top: 50px; /* specify units for numerical values */
   left: 0;
   right: 0;
   margin: 0 auto;
-
   border-radius: 15px;
 `;
 
